@@ -2,6 +2,7 @@
     "tasks": [
         {
             "type": "cppbuild",
+<<<<<<< HEAD
             "label": "C/C++: g++.exe build active file",
             "command": "C:/mingw64/bin/g++.exe",
             "args": [
@@ -27,6 +28,10 @@
             "type": "cppbuild",
             "label": "C/C++: g++.exe build active file",
             "command": "C:\\mingw64\\bin\\g++.exe",
+=======
+            "label": "C/C++: gcc.exe build active file",
+            "command": "C:\\mingw64\\bin\\gcc.exe",
+>>>>>>> a97374e7e3c8fb937c31a2aac3fac4e8aa094c9f
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
@@ -38,6 +43,7 @@
                 "cwd": "${fileDirname}"
             },
             "problemMatcher": [
+<<<<<<< HEAD
                 "$g++"
             ],
             "group": "build",
@@ -58,6 +64,8 @@
                 "cwd": "C:/mingw64/bin"
             },
             "problemMatcher": [
+=======
+>>>>>>> a97374e7e3c8fb937c31a2aac3fac4e8aa094c9f
                 "$gcc"
             ],
             "group": {
