@@ -20,12 +20,16 @@ int main() {
     for (int i=0;i<K;i++) {
         sum=sum+n[i];
     }
-    for (int x=(sum/K);x>0;x--) {
+    for (int x=(sum/K);x>-1;x--) {
         int ssum=0;
         for (int i=0;i<K;i++) {
             ssum=ssum+(n[i]/x);
         }
-        if (ssum==N) {
+        if (x==0) {
+            cout << "0" <<"\n";
+            return 0;
+        }
+        else if (ssum==N) {
             cout << x <<"\n";
             return 0;
         }
