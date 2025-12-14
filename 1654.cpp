@@ -32,12 +32,12 @@ int main() {
     while (start <= end) {
         int mid = (end + start)/2;
         int tmp = num_of_line(mid);
-
+        cout <<"tmp: " << tmp  << " start:  " << start << " end: "<<end <<"\n";
         if (tmp >= N) {
-            ret = tmp;
-            end = mid - 1;
-        } else if (ret < N) {
+            ret = max(ret, mid);
             start = mid + 1;
+        } else if (tmp < N) {
+            end = mid - 1;
         }
     }
     
