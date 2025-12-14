@@ -5,12 +5,12 @@ using namespace std;
 vector<int> n;
 int K;
 int N;
-int ssum (int a) {
-    int Z=0;
+int num_of_line (int length) {
+    int ret = 0;
     for (int i = 0; i < K; i++) {
-        Z = Z + (n[i]/a);
+        ret = ret + (n[i]/length);
     }
-    return Z;
+    return ret;
 }
 
 int main() {
@@ -28,19 +28,18 @@ int main() {
     }
     int start = 0;
     int end = sum/N;
+    int ret = 0;
     while (start <= end) {
         int mid = (end + start)/2;
-        if (ssum(mid) >= N) {
-            if (ssum(mid+1) < N) {
-                cout << mid << "\n";
-                break;
-            }
-            else {
-                end = mid + 1;
-            }
+        int tmp = num_of_line(mid);
+
+        if (tmp >= N) {
+            ret = tmp;
+            end = mid - 1;
+        } else if (ret < N) {
+            start = mid + 1;
         }
-        else if (ssum(mid) < N) {
-            start = mid - 1;
-        }
-    }       
+    }
+    
+    cout << ret << "\n";
 }
