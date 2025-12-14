@@ -3,12 +3,19 @@
 
 using namespace std;
 vector<int> n;
+int K;
+int N;
+int ssum (int a) {
+    int Z=0;
+    for (int i = 0; i < K; i++) {
+        Z = Z + (n[i]/a);
+    }
+    return Z;
+}
 
 int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
-    int K;
-    int N;
     cin >> K;
     cin >> N;
     long long int sum = 0;
@@ -22,20 +29,18 @@ int main() {
     int start = 0;
     int end = sum/N;
     while (start <= end) {
-
-    }
-    for (int x = (sum/N); x > -1; x--) {
-        long long int ssum = 0;
-        if (x==0) {
-            cout << "0" <<"\n";
-            return 0;
-        }
-        for (int i = 0; i < K; i++) {
-            ssum = ssum + (n[i]/x);
-            if (ssum >= N) {
-                cout << x <<"\n";
-                return 0;
+        int mid = (end + start)/2;
+        if (ssum(mid) >= N) {
+            if (ssum(mid+1) < N) {
+                cout << mid << "\n";
+                break;
             }
-        }   
-    }
+            else {
+                end = mid + 1;
+            }
+        }
+        else if (ssum(mid) < N) {
+            start = mid - 1;
+        }
+    }       
 }

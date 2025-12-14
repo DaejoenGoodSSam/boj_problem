@@ -28,6 +28,11 @@ int main () {
             sum += k; 
         }
     }
+    if (cnt==0) {
+        cout << -1 << "\n";
+    }
+    else {
     cout << sum << "\n";
     cout << min << "\n";
+}
 }

@@ -29,8 +29,7 @@ int main () {
     else {
         cin >> a >> b >> c;
         j=gcd(gcd(a,b),c);
-        
-        cout << gcd(a,b);
+
     }
    for (f=1; f<j+1; f++) {
     if (j%f == 0) {
