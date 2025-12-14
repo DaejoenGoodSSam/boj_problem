@@ -26,13 +26,14 @@ int main() {
         n.push_back(tmp);
         sum = sum + n[i];
     }
-    int start = 0;
-    int end = sum/N;
-    int ret = 0;
+
+    unsigned int start = 0;
+    unsigned int  end = sum/N;
+    unsigned int ret = 0;
+
     while (start <= end) {
         int mid = (end + start)/2;
         int tmp = num_of_line(mid);
-        cout <<"tmp: " << tmp  << " start:  " << start << " end: "<<end <<"\n";
         if (tmp >= N) {
             ret = max(ret, mid);
             start = mid + 1;
