@@ -12,11 +12,17 @@ int main() {
     cin >> K;
     cin >> N;
     long long int sum = 0;
+    
     for (int i = 0; i < K; i++) {
         int tmp;
         cin >> tmp;
         n.push_back(tmp);
         sum = sum + n[i];
+    }
+    int start = 0;
+    int end = sum/N;
+    while (start <= end) {
+
     }
     for (int x = (sum/N); x > -1; x--) {
         long long int ssum = 0;
@@ -25,13 +31,11 @@ int main() {
             return 0;
         }
         for (int i = 0; i < K; i++) {
-            ssum=ssum+(n[i]/x);
+            ssum = ssum + (n[i]/x);
             if (ssum >= N) {
-            cout << x <<"\n";
-            return 0;
-        }
-        }
-         
-    
-}
+                cout << x <<"\n";
+                return 0;
+            }
+        }   
+    }
 }
