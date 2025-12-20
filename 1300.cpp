@@ -28,7 +28,6 @@ long long int mid=1;
         }
         if (tmp >= k ) {
             ttmp = mid;
-            cout << ttmp << "\n";
             high = mid - 1;
         }
         else if (tmp < k) {
