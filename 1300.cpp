@@ -9,34 +9,31 @@ int main () {ios_base::sync_with_stdio(0);
     cin.tie(0);
 cin >> N;
 cin >> k;
-int low = 1;
-int high = N*N;
-int i;
-int j;
+long long int low = 1;
+long long int high = N*N;
+long long int i;
+long long int j;
+long long int ttmp=1;
+long long int mid=1;
     while (low<=high) { 
-        int x=0;
-        int y=0;
-        int mid = (low + high) / 2;
-        for (i=1;i<high+1;i++)  {
-            for (j=1;j<high+1;i++)
-            if (i*j<mid) {
-                x++;
-                y++;
+        long long int tmp=0;
+        mid = (low + high) / 2;
+        for (i=1;i<N+1;i++)  {
+            if (mid >= i && mid < i*N) {
+                tmp = tmp + (mid / i);
             }
-            else if (i*j == mid) {
-                y++;
+            else if (mid >= i*N) {
+                tmp = tmp + N;
             }
         }
-        if (x <= k-1 && k-1 <= y) {
-            cout << mid;
-            break;
+        if (tmp >= k ) {
+            ttmp = mid;
+            cout << ttmp << "\n";
+            high = mid - 1;
         }
-        else if (y<k-1) {
-            int high=mid+1;
-        }
-        else if (x>k-1){
-            int low=mid-1;
+        else if (tmp < k) {
+            low = mid + 1;
         }
     }
-
+    cout << ttmp << "\n";
 }
