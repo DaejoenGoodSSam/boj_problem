@@ -4,7 +4,7 @@
 
 using namespace std;
 vector <int> increasing;
-int ttmp = 0;
+int ttmp;
 int binary_search(int value) {
     int start = 0;
     int end = increasing.size() - 1;
@@ -36,7 +36,8 @@ int main () {ios_base::sync_with_stdio(0);
             increasing.push_back(tmp);
         }
         else if (tmp < increasing.back()) {
-            increasing[binary_search(i)] = tmp;
+            cout << binary_search(i) << "\n";
+            increasing[binary_search(tmp)] = tmp;
         }
             for (int k = 0; k<increasing.size(); k++) {
         cout << increasing[k] << "\n";
