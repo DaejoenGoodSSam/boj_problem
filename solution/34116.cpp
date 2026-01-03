@@ -35,9 +35,9 @@ int main(void) {
     sort(vy.begin(), vy.end());
 
     // simul 1 위 직각 
-    int bottom_y = vy[0];
-    int l = um[bottom_y].first;
-    int r = um[bottom_y].second;
+    int by = vy[0];
+    int l = um[by].first;
+    int r = um[by].second;
     
     for(int i=1; i<vy.size(); i++) {
         int y = vy[i];
