@@ -89,12 +89,12 @@ int main() {ios_base::sync_with_stdio(0);
                     result[owned[i][j]]++;
                 }
                 else {
-                    // Merge ??
+                    owned[i][j] = owned[i][j - 1];
                     for (int k = j + 1; k < N; k++) {
-                        owned[i][j] = owned[i][j - 1];
                         if (owned[i - 1][k] == owned[i - 1][j]) {
-                            result[owned[i][j - 1]] = result[owned[i][j - 1]] + result[owned[i][j - 1]];
-                            result[owned[i - 1][k]] = owned[i][j-1];
+                            result[owned[i][j - 1]] = result[owned[i][j - 1]] + result[owned[i - 1][k]];
+                            result[owned[i - 1][k]] = 0;
+                            owned[i - 1][k] = owned[i][j-1];
                         }
                         result[owned[i][j - 1]]++;
                     }
@@ -106,10 +106,13 @@ int main() {ios_base::sync_with_stdio(0);
     print_matrix(owned, N);
 
     int ttmp = 0;
-    for (int i = 0; i < N*N; i++) {
-        if (result[i] > 0) {
-            ttmp++;
-            last.push_back(result[i]);
+    for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+            if (result[owned[i][j]] > 0) {
+                ttmp++;
+                last.push_back(result[owned[i][j]]);
+                result[owned[i][j]] = 0;
+            }
         }
     }
 
