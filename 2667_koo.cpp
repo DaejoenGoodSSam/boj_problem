@@ -6,7 +6,6 @@ using namespace std;
 #define MAX 26
 
 
-
 void init_matrix (int matrix[MAX][MAX], int size) {
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
@@ -25,12 +24,7 @@ void print_matrix (int matrix[MAX][MAX], int size) {
     }
 }
 
-void print_vector (vector<int> ret) {
-    for (auto elem : ret) {
-        cout << elem << " " ;
-    }
-    cout << endl;
-}
+
 
 int main() {ios_base::sync_with_stdio(0);
     cin.tie(0);
@@ -45,6 +39,29 @@ int main() {ios_base::sync_with_stdio(0);
 
     for (int i = 0; i < N; i++) {
         cin >> arr[i];
+    }
+
+    int group = 1;
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            if (arr[i][j] != '1') {
+                continue;
+            }
+            
+            // if left exist, and they already participate in group
+            // then propagate
+            if (i > 0 && owned[i-1][j] != 0) {
+                owned[i][j] = owned[i-1][j]; // propagate from left
+            } 
+
+             // if up exist, and they already participate in group
+            // then propagate
+            if (j > 0 && owned[i][j-1] != 0) {
+                owned[i][j] = owned[i-1][j]; // propagate from up
+            }
+
+            
+        }
     }
 
     if (arr[0][0] == '1') {
@@ -97,25 +114,17 @@ int main() {ios_base::sync_with_stdio(0);
                     result[owned[i][j]]++;
                 }
                 else {
-
-                    if (owned[i-1][j] == owned[i][j-1]) {
-                        owned[i][j] = owned[i-1][j];
-                        result[owned[i][j]] ++;
-                    } else {
+                    // Merge ??
+                    for (int k = j + 1; k < N; k++) {
                         owned[i][j] = owned[i][j - 1];
-
-                        for (int k = j + 1; k < N; k++) {
-                            if (owned[i - 1][k] == owned[i - 1][j]) {
-                                owned[i - 1][k] = owned[i][j-1];
-                            }
+                        if (owned[i - 1][k] == owned[i - 1][j]) {
+                            result[owned[i][j - 1]] = result[owned[i][j - 1]] + result[owned[i - 1][k]];
+                            result[owned[i - 1][k]] = owned[i][j-1];
                         }
-                        result[owned[i][j - 1]] = result[owned[i][j - 1]] + result[owned[i - 1][j]];
-                        result[owned[i - 1][j]] = 0;
                         result[owned[i][j - 1]]++;
+                        print_matrix(owned,N);
                     }
-                    print_vector(result);
                 }
-
             }        
         }
     }
@@ -123,20 +132,17 @@ int main() {ios_base::sync_with_stdio(0);
     print_matrix(owned, N);
 
     int ttmp = 0;
-    for (int i = 0; i < N; i++) {
-            for (int j = 0; j < N; j++) {
-            if (result[owned[i][j]] > 0) {
-                ttmp++;
-                last.push_back(result[owned[i][j]]);
-                result[owned[i][j]] = 0;
-            }
+    for (int i = 0; i < N*N; i++) {
+        if (result[i] > 0) {
+            ttmp++;
+            last.push_back(result[i]);
         }
     }
 
     sort(last.begin(),last.end());
 
     cout << ttmp << "\n";
-    for (int i = 0; i < last.size(); i++) {
+    for (int i = last.size() - 1; i > -1; i--) {
         cout << last[i] << endl;
     }
 }

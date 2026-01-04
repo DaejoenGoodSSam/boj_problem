@@ -10,11 +10,11 @@ void dfs(const vector<int> graph[], vector<int>& visited, int current) {
 	if (visited[current] != -1) {
 		return;
 	}
-	
+
 	// 방문 순서를 입력
 	visited[current] = order++;
 
-	for (int next : graph[current]) {
+	for (auto next : graph[current]) {
 		if (visited[next] == -1) {
 			dfs(graph, visited, next);
 		}
