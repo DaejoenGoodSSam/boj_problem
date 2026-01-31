@@ -7,7 +7,7 @@ vector<int> number;
 int h = 0;
 int t = 0;
 int sum = 0;
-int ttmp = 10001;
+int ttmp = 100001;
 void two_pointer (int N, int S) {
     sum = number[0];
     while (t < N) {
@@ -37,7 +37,7 @@ int main () {ios_base :: sync_with_stdio(0);
         number.push_back(tmp);
     }
         two_pointer (N,S);
-        if (ttmp == 10001) {
+        if (ttmp == 100001) {
             cout << 0;
         }
         else {

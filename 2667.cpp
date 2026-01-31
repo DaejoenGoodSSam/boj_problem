@@ -6,32 +6,6 @@ using namespace std;
 #define MAX 26
 
 
-
-void init_matrix (int matrix[MAX][MAX], int size) {
-    for (int i = 0; i < size; i++) {
-        for (int j = 0; j < size; j++) {
-            matrix[i][j]  = 0;
-        }
-    }
-}
-
-void print_matrix (int matrix[MAX][MAX], int size) {
-    cout << "=== print_matrix ===" << endl;
-    for (int i = 0; i < size; i++) {
-        for (int j = 0; j < size; j++) {
-            cout << matrix[i][j] << " ";
-        }
-        cout << endl;
-    }
-}
-
-void print_vector (vector<int> ret) {
-    for (auto elem : ret) {
-        cout << elem << " " ;
-    }
-    cout << endl;
-}
-
 int main() {ios_base::sync_with_stdio(0);
     cin.tie(0);
     int N;
@@ -40,8 +14,6 @@ int main() {ios_base::sync_with_stdio(0);
     int owned[MAX][MAX];
     vector<int> result(N*N,0);
     vector<int> last;
-    
-    init_matrix(owned,N);
 
     for (int i = 0; i < N; i++) {
         cin >> arr[i];
@@ -93,7 +65,6 @@ int main() {ios_base::sync_with_stdio(0);
                 }
                 else if (arr[i][j - 1] == '0' && arr[i - 1][j] == '0') {
                     owned[i][j] = j + i*N;
-                    cout << "owned[i][j]: " << owned[i][j] << endl;
                     result[owned[i][j]]++;
                 }
                 else {
@@ -113,15 +84,11 @@ int main() {ios_base::sync_with_stdio(0);
                         result[owned[i - 1][j]] = 0;
                         result[owned[i][j - 1]]++;
                     }
-                    print_vector(result);
                 }
 
             }        
         }
     }
-
-    print_matrix(owned, N);
-
     int ttmp = 0;
     for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {

@@ -1,6 +1,7 @@
 #include<iostream>
 #include<algorithm>
 #include<vector>
+#include<math.h>
 using namespace std;
 
 vector<int>prime;
@@ -10,7 +11,7 @@ int t = 0;
 int ttmp = 0;
 void two_pointer (int N) {
     sum = 2;
-    while (t < N) {
+    while (t < prime.size()) {
         if (sum < N) {
             t++;
             if (t == prime.size()) {
@@ -30,23 +31,28 @@ void two_pointer (int N) {
     
     }
 }
-int main () {ios_base :: sync_with_stdio;
+int main () {ios_base :: sync_with_stdio;cin.tie(0);
     int N;
     cin >> N;
-    prime.push_back(2);
-    for (int i = 3; i < N + 1; i+=2) {
-        int isPrime = 1;
-        for (int j = 0; j < prime.size(); j++) {
-            if (i%prime[j] == 0) {
-                isPrime = 0;
-                break;
-            }
+    int arr[N + 1];
+    fill(arr, arr + N + 1, true);
+    arr[1] = false;
+    for (int i = 2; i < sqrt(N); i++) {
+        if (arr[i] == false) {
+            continue;
         }
-        if (isPrime == 1) {
-            prime.push_back(i);
+        for (int j = i*i; j < N + 1; j+=i) {
+            arr[j] = false;
         }
     }
-    if (N < 2) {
+    for (int i = 2; i < N + 1; i++) {
+        if (arr[i] == true) {
+            prime.push_back(i);
+            cout << i << " ";
+        }
+    } 
+    
+    if (N == 1) {
         cout << 0;
     }
     else {

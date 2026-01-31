@@ -27,12 +27,12 @@ int main() {
         sum = sum + n[i];
     }
 
-    unsigned int start = 0;
+    unsigned int start = 1;
     unsigned int  end = sum/N;
     unsigned int ret = 0;
 
     while (start <= end) {
-        int mid = (end + start)/2;
+        unsigned int mid = (end + start)/2;
         int tmp = num_of_line(mid);
         if (tmp >= N) {
             ret = max(ret, mid);

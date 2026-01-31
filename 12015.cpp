@@ -36,11 +36,7 @@ int main () {ios_base::sync_with_stdio(0);
             increasing.push_back(tmp);
         }
         else if (tmp < increasing.back()) {
-            cout << binary_search(i) << "\n";
             increasing[binary_search(tmp)] = tmp;
-        }
-            for (int k = 0; k<increasing.size(); k++) {
-        cout << increasing[k] << "\n";
         }
     }
     cout << increasing.size() << "\n";

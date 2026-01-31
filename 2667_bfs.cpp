@@ -48,7 +48,7 @@ int main() {ios_base :: sync_with_stdio(0);
         }
         sort(result.begin(), result.end());
         cout << result.size() << endl;
-        for (int i = 0 ; result.size(); i++) {
+        for (int i = 0 ; i < result.size(); i++) {
             cout << result[i] << "\n";
         }
 }
