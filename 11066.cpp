@@ -33,14 +33,9 @@ int money(int a, int b) {
         return arr[a][b];
     }
 
+
     for (int i = 0; i < b - a; i++) {
-        if (arr[a][a + i] == -1) { 
-            arr[a][a + i] = money(a, a + i);
-        }
-        if (arr[a + i + 1][b] == -1) { 
-            arr[a + i + 1][b] = money(a + i + 1, b);
-        }   
-        int tttmp = arr[a][a + i] + arr[a + i + 1][b] + sum(a , b);
+        int tttmp = money(a, a + i) + money(a + i + 1, b) + sum(a , b);
 
         if (tttmp < min) {
             min = tttmp;

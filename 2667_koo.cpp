@@ -4,7 +4,12 @@
 #include<string>
 using namespace std;
 #define MAX 26
-
+void print_vector (vector<int> ret) {
+    for (auto elem : ret) {
+        cout << elem << " " ;
+    }
+    cout << endl;
+}
 
 void init_matrix (int matrix[MAX][MAX], int size) {
     for (int i = 0; i < size; i++) {
@@ -41,91 +46,48 @@ int main() {ios_base::sync_with_stdio(0);
         cin >> arr[i];
     }
 
+
     int group = 1;
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
+            int prop_left = 0;
+            int prop_up = 0;
             if (arr[i][j] != '1') {
                 continue;
             }
-            
-            // if left exist, and they already participate in group
+            // if up exist, and they already participate in group
             // then propagate
             if (i > 0 && owned[i-1][j] != 0) {
-                owned[i][j] = owned[i-1][j]; // propagate from left
+                prop_up = owned[i-1][j]; // propagate from up
             } 
-
-             // if up exist, and they already participate in group
+             // if left exist, and they already participate in group
             // then propagate
             if (j > 0 && owned[i][j-1] != 0) {
-                owned[i][j] = owned[i-1][j]; // propagate from up
+                prop_left = owned[i][j-1]; // propagate from left
             }
 
-            
-        }
-    }
-
-    if (arr[0][0] == '1') {
-        owned[0][0] = 0;
-        result[0]++;
-    }
-
-    for (int i = 1; i < N; i++) {
-        char tmp = arr[0][i];
-        if (tmp == '1') {
-            if (arr[0][i - 1] == '1') {
-                owned[0][i] = owned[0][i-1];
-                result[owned[0][i - 1]]++;
+            if (prop_left != 0 && prop_up !=0) {
+                // merge from left and up
+                cout << "merge with " <<prop_up <<" "<< prop_left << endl;
+                result[prop_up] = result[prop_up] + result[prop_left] + 1;
+                owned[i][j] = prop_up;
+                result[prop_left] = 0;
+            } else if (prop_left != 0) {
+                cout << "ddddd2" << endl;
+                result[prop_left] ++;
+                owned[i][j] = prop_left;
+            } else if (prop_up != 0) {
+                cout << "ddddd3" << endl;
+                result[prop_up] ++;
+                owned[i][j] = prop_up;
+            } else {
+                // new group
+                cout << "ddddd4" << endl;
+                group = i*N + j;
+                result[group] = 1;
+                owned[i][j] = group;
             }
-            else if (arr[0][i - 1] == '0') {
-                owned[0][i] = i;
-                result[owned[0][i]]++;
-            }
-        }
-    }
-
-    for (int j = 1; j < N; j++) {
-        char tmp = arr[j][0];
-        if (tmp == '1') {
-            if (arr[j - 1][0] == '1') {
-                owned[j][0] = owned[j-1][0];
-                result[owned[j - 1][0]]++;
-            }
-            else if (arr[j - 1][0] == '0') {
-                owned[j][0] = j;
-                result[owned[j][0]]++;
-            }
-        }
-    }
-
-    for (int i = 1; i < N; i++) {
-        for (int j = 1; j < N; j++) {
-            if (arr[i][j] == '1') {
-                if (arr[i - 1][j] == '1' && arr[i][j - 1] == '0') {
-                    owned[i][j] = owned[i - 1][j];
-                    result[owned[i - 1][j]]++;
-                }
-                else if (arr[i][j - 1] == '1' && arr[i - 1][j] == '0') {
-                    owned[i][j] = owned[i][j - 1];
-                    result[owned[i][j - 1]]++;
-                }
-                else if (arr[i][j - 1] == '0' && arr[i - 1][j] == '0') {
-                    owned[i][j] = j + i*N;
-                    cout << "owned[i][j]: " << owned[i][j] << endl;
-                    result[owned[i][j]]++;
-                }
-                else {
-                    // Merge ??
-                    for (int k = j + 1; k < N; k++) {
-                        owned[i][j] = owned[i][j - 1];
-                        if (owned[i - 1][k] == owned[i - 1][j]) {
-                            result[owned[i][j - 1]] = result[owned[i][j - 1]] + result[owned[i - 1][k]];
-                            result[owned[i - 1][k]] = owned[i][j-1];
-                        }
-                        result[owned[i][j - 1]]++;
-                        print_matrix(owned,N);
-                    }
-                }
-            }        
+            print_vector(result);
         }
     }
 

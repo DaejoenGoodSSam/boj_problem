@@ -12,7 +12,6 @@ int dx[4] = {1, -1, 0, 0};
 int dy[4] = {0, 0, 1, -1};
 vector<int> result;
 queue<pair<int,int>> q;
-
 void bfs(int x,int y) {
     q.push({x,y});
     visited[x][y]=true;
