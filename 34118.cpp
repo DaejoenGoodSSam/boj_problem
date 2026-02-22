@@ -9,6 +9,16 @@ vector<int> va, vb;
 int N;
 int p1, p3, p5, p;
 
+
+void print_trv() {
+    for (int i = 0; i < N + 1; i++) {
+        for (int j = 0; j < N + 1; j++) {
+            cout << trv[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
 void update_a (int i, int j) {
     trv[i][j] = min(trv[i - 1][j] + p1, trv[i][j]);
     for (int x = 0; x < 3; x++) {
@@ -36,13 +46,17 @@ void update_p (int i, int j) {
 }
 int main () {
     cin >> N;
-    cin >> p1 >> p3 >> p5 >> p;
-    int result = 0;
     string sa, sb;
     cin >> sa >> sb;
+    cin >> p1 >> p3 >> p5 >> p;
+    int result = 0;
+
+
     va.resize(N + 1, 0);
     vb.resize(N + 1, 0);
     for (int i = 1; i <= N; i++) {
+        cout << sa[i - 1] << endl;
+        cout << sb[i - 1] << endl;
         if (sa[i - 1]=='1') va[i] = 1;
         if (sb[i - 1]=='1') vb[i] = 1;
     }
@@ -52,33 +66,30 @@ int main () {
             trv[i][j] = MAX;
         }
     }
-    for (int i = 0; i < N + 1; i++) {
-        for (int j = 0; j < N + 1; j++) {
-            if (i == 0 && j == 0) {
-                trv[i][j] = 0;
-            }
-            else {
-                if (i == j) {
-                    update_p(i , j);
-                }
-                if (va[i] = 1) {
-                    update_a(i , j);
-                }
-                else if (va[i] == 0) {
-                    trv[i][j] = trv[i - 1][j];
-                }
-                if (vb[j] = 1) {
-                    update_b(i , j);
-                }
-                else if (vb[j] == 0) {
-                    trv[i][j] = trv[i][j - 1];
-                }
-            }
-        }
-    }
+   
+    trv[0][0] = 0;
+    print_trv();
     for (int i = 1; i < N + 1; i++) {
         for (int j = 1; j < N + 1; j++) {
-            cout << trv[i][j];
+            if (i == j) {
+                update_p(i , j);
+            }
+
+            if (va[i] == 1) {
+                update_a(i , j);
+            }
+            else if (va[i] == 0) {
+                trv[i][j] = trv[i - 1][j];
+            }
+
+            if (vb[j] == 1) {
+                update_b(i , j);
+            }
+            else if (vb[j] == 0) {
+                trv[i][j] = trv[i][j - 1];
+            }
         }
     }
+    print_trv();
+
 }
