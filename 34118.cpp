@@ -23,11 +23,11 @@ int main () {
     }
     trv[0][0] = 0;
     if  (p1 == 1 && p3 == 10000 && p5 == 10000 && p == 10000){
-    for (int i = 1; i < N + 1; i++) {
-        if (va[i] == 1) result++;
-        if (vb[i] == 1) result++;
+        for (int i = 1; i < N + 1; i++) {
+            if (va[i] == 1) result++;
+            if (vb[i] == 1) result++;
+        }
     }
-}
     else if  (p1 == 10000 && p3 == 10000 && p5 == 10000 && p == 1){
         int tmp = 0;
         int ttmp = 0;

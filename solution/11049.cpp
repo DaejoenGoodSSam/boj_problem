@@ -16,6 +16,7 @@ pair<int, int> matrix[501];
 int dp[501][501];
 pair<int, int> dp_matrix[501][501];
 
+
 int Sum(int dx, int mid, int dy) {
 	return dp_matrix[dx][mid].first * dp_matrix[dx][mid].second * dp_matrix[mid + 1][dy].second;
 }
