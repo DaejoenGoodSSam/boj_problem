@@ -2,19 +2,9 @@
 #include<vector>
 using namespace std;
 
-vector<int>parent;
+vector<int> parent;
 int n, m;
 
-
-void Union (int a, int b) {
-  int pa = parent[a];
-  int pb = parent[b];
-  
-  if (pa < pb)
-    parent[pb] = pa;
-  else
-    parent[pa] = pb;
-}
 
 int find (int a) {
   if (a == parent[a]) {
@@ -23,11 +13,25 @@ int find (int a) {
   return parent[a] = find (parent[a]);
 }
 
+void Union (int a, int b) {
+  int pa = find(a);
+  int pb = find(b);
+  
+  if (pb != pa)
+    parent[pb] = pa;
+}
+
+
 int main() {
+  cin.tie(nullptr);
+  cout.tie(nullptr);
+  ios_base::sync_with_stdio(false);
   int tmp, ttmp, tttmp;
+
   cin >> n >> m;
+  parent.resize(n+1);
   for (int i = 0; i < n + 1; i++) {
-    parent.push_back(i);
+    parent[i] = i;
   }
   for (int i = 1; i < m + 1; i++) {
     cin >> tmp >> ttmp >> tttmp;
@@ -36,9 +40,9 @@ int main() {
     }
     else if (tmp == 1) {
       if (find(ttmp) == find(tttmp)) {
-        cout << "yes" << endl;
+        cout << "yes" << "\n";
       } else {
-        cout << "no" << endl;
+        cout << "no" << "\n";
       }
     }
   }
